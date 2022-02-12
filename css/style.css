@@ -1,0 +1,33 @@
+body {
+    background-color: rgb(17, 17, 99)
+}
+#info-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    
+    gap: 1px;
+    margin-top:25px;
+    width: 400px;
+    
+   
+}
+.childDiv {
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    border: 1px solid white;
+    background-color: rgb(130, 130, 21);
+    width:100px;
+    height:100px;
+    cursor: pointer;
+    
+    
+    
+}
+#reset {
+    cursor:pointer
+}
+#box1-X {
+    
+}
