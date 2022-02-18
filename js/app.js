@@ -1,8 +1,5 @@
-//create variables to reference 9 boxes each with specific ID
-
-const reset = document.querySelector('#reset')
-const message = document.querySelector('#message')
-const playAgainButton = document.querySelector('#play-again')
+const resetButton = document.querySelector('#reset')
+const userMessage = document.querySelector('#message')
 const Box1 = document.querySelector('#box1')
 const Box2 = document.querySelector('#box2')
 const Box3 = document.querySelector('#box3')
@@ -12,63 +9,163 @@ const Box6 = document.querySelector('#box6')
 const Box7 = document.querySelector('#box7')
 const Box8 = document.querySelector('#box8')
 const Box9 = document.querySelector('#box9')
+const winTieMessage = document.getElementById('win-tie-message')
+const currentPlayer = document.getElementById('player-turn')
 
-//Was playing around with querySelectorAll to reference
-//all of them via class
-//const Boxes = document.querySelectorAll('.childDiv')
-
-//create an array to store the querySelector for each box
-const boxes = [Box1,Box2,Box3,Box4,Box5,Box6,Box7,Box8,Box9]
-
-////const boxesId = ['#box1','#box2','#box3','#box4','#box5','#box6','#box7','#box8','#box9']
-
-//create a function for appending a child into the div
-//so it loops through the nine boxes referenced in the array
-
-const playerMove = () => { 
-    //didn't get to figure out how to apply the logic
-    //to switch values
-   let player1 = "o"
-   let player2 = "x"
-   
-   for (let i = 0; i < boxes.length; i++) {
-    //console.log(boxes[i]) 
-        boxes[i].onclick = function () {
-        addXtoBox = document.createElement("p")
-        addXtoBox.innerText = "x"
-        boxes[i].appendChild(addXtoBox)
-        //create a condition so the child that's appended
-        //doesn't repeat whenever I click
-            if(boxes[i].firstChild){
-            boxes[i].removeChild(boxes[i].firstChild)
-            }
+let player = "x"
+const playerTurn = (event) => {
+    currentPlayer.innerText = `${player}'s turn`
+    if (player === 'x'){
+        player = 'o'      
+    }
+    else {
+        player = 'x'
+    }
+}
+const addMoveBox1 = (event) => {
+    playerTurn()
+    const addX = document.createElement('p')
+    addX.innerText = player
+    Box1.appendChild(addX)
+    winGame()
+    Box1.removeEventListener('click',addMoveBox1)
+     
+}
+const addMoveBox2 = (event) => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box2.appendChild(addX)
+    winGame()
+    Box2.removeEventListener('click',addMoveBox2)
+}
+function addMoveBox3(event) {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box3.appendChild(addX)
+    winGame()
+    Box3.removeEventListener('click', addMoveBox3)
+    console.log(event.target)
+}
+const addMoveBox4 = (event) => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box4.appendChild(addX)
+    winGame()
+    if(Box4.firstChild){
+        Box4.removeChild(Box4.firstChild)
         }
-    }
-}  
-
-//create a variable to generate game once the game ends, include
-//an innerText for the <p> element in html that has a specific ID
-//so the user is instructed to play again
-
-const generateGame = () => {
-message.innerText = "Make your move!"
-// I tried playing around with the playerMove() function and placing it 
-//because I was having issues being able to append children to the divs
-//once the game is cleared.
-playerMove()
+        Box4.removeEventListener('click',addMoveBox4)
 }
+const addMoveBox5 = (event) => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box5.appendChild(addX)
+    winGame()
+    if(Box5.firstChild){
+      Box5.removeChild(Box5.firstChild)
+    }
+    Box5.removeEventListener('click',addMoveBox5)
 
+}
+const addMoveBox6 = () => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box6.appendChild(addX)
+    winGame()
+    if(Box6.firstChild){
+        Box6.removeChild(Box6.firstChild)
+        }
+        Box6.removeEventListener('click',addMoveBox6)
+}
+const addMoveBox7 = () => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box7.appendChild(addX)
+    winGame()
+    if(Box7.firstChild){
+        Box7.removeChild(Box7.firstChild)
+        }
+        Box7.removeEventListener('click',addMoveBox7)
+}
+const addMoveBox8 = (event) => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box8.appendChild(addX)
+    winGame()
+    if(Box8.firstChild){
+        Box8.removeChild(Box8.firstChild)
+        }
+        Box8.removeEventListener('click',addMoveBox8)
+}
+const addMoveBox9 = (event) => {
+    playerTurn()
+    const addX = document.createElement("p")
+    addX.innerText = player
+    Box9.appendChild(addX)
+    winGame()
+    if(Box9.firstChild){
+        Box9.removeChild(Box9.firstChild)
+    }
+        Box9.removeEventListener('click',addMoveBox9)            
+}
+const winGame = () => {
+  let winGame = true
+    if (Box1.innerText !== "" && Box2.innerText !== "" && Box3.innerText !== "" &&
+    Box4.innerText !== "" && Box5.innerText!== "" && Box6.innerText !== "" &&
+    Box7.innerText !== "" && Box8.innerText !== "" && Box7.innerText !== "" &&
+    Box2.innerText !== "" && Box5.innerText !== "" && Box8.innerText !== "" &&
+    Box3.innerText !== "" && Box6.innerText !== "" && Box9.innerText !== "" &&
+    Box7.innerText !== "" && Box5.innerText !== "" && Box3.innerText !== "" &&
+    Box1.innerText !== "" && Box5.innerText !== "" && Box9.innerText !== ""){ 
+        
+    winTieMessage.innerText = `it's a tie!`
+         
+    currentPlayer.innerText = "click reset to play again!"
+    }
+    else if (Box1.innerText === player && Box2.innerText === player && Box3.innerText === player ||
+    Box4.innerText === player && Box5.innerText === player && Box6.innerText === player ||
+    Box1.innerText === player && Box4.innerText === player && Box7.innerText === player ||
+    Box2.innerText === player && Box5.innerText === player && Box8.innerText === player ||
+    Box3.innerText === player && Box6.innerText === player && Box9.innerText === player ||
+    Box7.innerText === player && Box5.innerText === player && Box3.innerText === player ||
+    Box1.innerText === player && Box5.innerText === player && Box9.innerText === player){
+       
+    winTieMessage.innerText = `${player} wins!`
+         
+    currentPlayer.innerText = "click reset to play again!"
+
+    Box1.removeEventListener('click',addMoveBox1)
+    Box2.removeEventListener('click',addMoveBox2)
+    Box3.removeEventListener('click',addMoveBox3)
+    Box4.removeEventListener('click',addMoveBox4)
+    Box5.removeEventListener('click',addMoveBox5)
+    Box6.removeEventListener('click',addMoveBox6)
+    Box7.removeEventListener('click',addMoveBox7)
+    Box8.removeEventListener('click',addMoveBox8)
+    Box9.removeEventListener('click',addMoveBox9)
+    }
+}
 const clearGame = () => {
-    for (let i = 0;i < boxes.length;i++){
-       boxes[i].removeChild(boxes[i].firstChild)
-    }
-message.innerText = 'game successfully cleared'
+        window.location.reload();
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
-playerMove()
-reset.addEventListener('click', clearGame)
-playAgainButton.addEventListener('click',generateGame)
-
+    playerTurn()
+    Box1.addEventListener('click',addMoveBox1)
+    Box2.addEventListener('click',addMoveBox2)
+    Box3.addEventListener('click',addMoveBox3)
+    Box4.addEventListener('click',addMoveBox4)
+    Box5.addEventListener('click',addMoveBox5)
+    Box6.addEventListener('click',addMoveBox6)
+    Box7.addEventListener('click',addMoveBox7)
+    Box8.addEventListener('click',addMoveBox8)
+    Box9.addEventListener('click',addMoveBox9)
+    resetButton.addEventListener('click',clearGame)
 })
